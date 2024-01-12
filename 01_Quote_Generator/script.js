@@ -6,33 +6,42 @@ const twitterBtn = document.querySelector("#twitter");
 const quoteTextArea = document.querySelector(".quote-area");
 const loader = document.querySelector("#loader");
 
-// start loading animation
-function loading() {
+function showLoadingSpinner() {
   loader.hidden = false;
   quoteContainer.hidden = true;
 }
 
-// loading completed and remove the loader
-function complete() {
+function removeLoadingSpinner() {
   loader.hidden = true;
   quoteContainer.hidden = false;
 }
+
+let errorCount = 0;
 // API call
 function getQuotes() {
   // Start the loader
-  loading();
+  showLoadingSpinner();
   const apiUrl = "https://api.quotable.io/random";
 
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      setQuote(data);
+      setQuote(data); //If data received from API call the setQuote to set the texts
     })
-    .catch((error) => alert("Oopsie daisy, there is some error", error));
+    .catch((error) => {
+      errorCount++;
+      if (errorCount < 5) {
+        getQuotes(); //Recursive call
+      } else {
+        console.log(
+          "API call limit exceeded.Something wrong with the code",
+          error
+        );
+      }
+    });
 }
 getQuotes();
-
 
 function setQuote(data) {
   // If text size is too long then decrease the font-size
@@ -43,10 +52,10 @@ function setQuote(data) {
     quoteTextArea.classList.remove("long-quote-text");
     quoteTextArea.classList.add("quote-text");
   }
-  // remove the loader
+
   quote.textContent = data.content;
   author.textContent = data.author;
-  complete();
+  removeLoadingSpinner();
 }
 
 function tweetQuote() {
