@@ -1,5 +1,5 @@
 // Get quotes from API
-const quoteContainer = document.querySelector('#quote-container')
+const quoteContainer = document.querySelector("#quote-container");
 const quote = document.querySelector("#quote");
 const author = document.querySelector("#author");
 const twitterBtn = document.querySelector("#twitter");
@@ -7,16 +7,15 @@ const quoteTextArea = document.querySelector(".quote-area");
 const loader = document.querySelector("#loader");
 
 // start loading animation
-function loading(){
+function loading() {
   loader.hidden = false;
-  quoteContainer.hidden = true
+  quoteContainer.hidden = true;
 }
 
 // loading completed and remove the loader
-function complete(){
+function complete() {
   loader.hidden = true;
-  quoteContainer.hidden =false;
-
+  quoteContainer.hidden = false;
 }
 // API call
 function getQuotes() {
@@ -30,7 +29,7 @@ function getQuotes() {
       console.log(data);
       setQuote(data);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => alert("Oopsie daisy, there is some error", error));
 }
 getQuotes();
 
@@ -47,10 +46,31 @@ function setQuote(data) {
   // remove the loader
   quote.textContent = data.content;
   author.textContent = data.author;
-  complete()
+  complete();
 }
 
 function tweetQuote() {
   const twitterUrl = `https://twitter.com/intent/tweet?text=${quote.textContent} - ${author.textContent}`;
   window.open(twitterUrl, "_blank");
 }
+
+/* 
+// Another api : https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json
+// This API will produce CORS error. So to solve this we will use `proxy`
+
+function anothergetQuote() {
+  const proxyURL = "https://cors-anywhere.herokuapp.com/"; //This might be sometimes down so it will be better to make your own proxy
+
+  const apiURL =
+    proxyURL +
+    "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json";
+  fetch(apiURL)
+    .then((response) => response.json())
+    .then((data) => console.log("API 2 data: ", data))
+    .catch((error) => {
+      alert("Oopsie daisy, there is some error", error);
+    });
+}
+
+anothergetQuote()
+ */
