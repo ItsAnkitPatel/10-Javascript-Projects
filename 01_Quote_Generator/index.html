@@ -11,7 +11,7 @@
 <body>
     <div class="quote-container" id="quote-container">
         <!-- Quote -->
-        <div class="quote-text">
+        <div class="quote-area quote-text">
             <i class="fas fa-quote-left"></i>
             <span id="quote">What you are is what you have been. What you'll be is what you do now.</span>
         </div>
@@ -22,13 +22,16 @@
 
         <!-- Buttons -->
         <div class="button-container">
-            <button class="twitter-button" id="twitter" title="Tweet This!">
+            <button class="twitter-button" id="twitter" title="Tweet This!" onclick="tweetQuote()">
                 <i class="fab fa-twitter"></i>
             </button>
-            <button id="new-quote">New Quote</button>
+            <button id="new-quote" onclick="getQuotes()">New Quote</button>
         </div>
 
     </div>
+    <!-- Loader -->
+    <div class="loader" id="loader"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
