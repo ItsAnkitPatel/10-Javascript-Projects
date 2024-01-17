@@ -8,7 +8,7 @@ let totalImages = 0;
 let initialLoad = true;
 
 let photosArray = [];
-//We are doing this because: If the internet is slow we will first load the 5 images only
+//We are doing this because: If the user internet is slow we will first load the 5 images only
 let initialCount = 5;
 const apiKEY = "Au8NpSZ6fTnMFy87YhhtjjLsqyvz9gqMYgYM9snFBwo";
 let apiURL = `https://api.unsplash.com/photos/random/?client_id=${apiKEY}&count=${initialCount}`;
@@ -19,6 +19,12 @@ function imageLoaded() {
   if (imagesLoadedCount === totalImages) {
     loader.hidden = true;
     readyToLoadMorePhotos = true;
+    if (initialLoad) {
+      // When the initial 5 images get loaded we will change the count to 30
+      updateAPIURLWithNewCount(30);
+      addScrollEvent();
+      initialLoad = false;
+    }
   }
 }
 
@@ -68,17 +74,11 @@ function getPhotos() {
       displayPhotos(); //Start creating elements
     })
     .catch((err) => console.log(err));
-    if(initialLoad){
-      updateAPIURLWithNewCount(30);
-      addScrollEvent();
-      initialLoad =false;
-    }
 }
 
 function updateAPIURLWithNewCount(newCount) {
   apiURL = `https://api.unsplash.com/photos/random/?client_id=${apiKEY}&count=${newCount}`;
 }
-
 
 // Check to see if scrolling near bottom of the page if yes then load more photos
 function addScrollEvent() {
@@ -90,7 +90,6 @@ function addScrollEvent() {
     ) {
       // reset the values
       readyToLoadMorePhotos = false;
-      console.log("Window Object called");
       getPhotos();
     }
   });
