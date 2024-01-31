@@ -19,6 +19,11 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
+/* Set scrollbar width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
 /* --- Navigation Menu ------------------------------ */
 
 /* overlay */
