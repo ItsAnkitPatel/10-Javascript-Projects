@@ -121,7 +121,7 @@ li span {
 }
 
 /* Complete */
-.complete {
+.complete-container {
   position: relative;
   top: 60px;
 }
@@ -173,7 +173,7 @@ li span {
     top: unset;
   }
 
-  .countdown {
+  .countdown-container {
     position: relative;
     top: 10px;
   }
