@@ -110,6 +110,18 @@ a:active {
   }
 }
 
+.fadeout-modal {
+  animation: modalclose 1s;
+}
+@keyframes modalclose {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -145,7 +157,7 @@ h3 {
 }
 .form-input {
   width: 97%;
-  pad: 5px;
+  padding: 5px;
   border: 2px solid var(--primary-color);
   border-radius: var(--border-radius);
   display: block;
