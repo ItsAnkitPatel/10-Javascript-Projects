@@ -35,14 +35,14 @@ body {
 
 video {
   border-radius: 5px;
-
+  width: 100%;
+  height: auto;
 }
 
 /* Containers */
 .show-controls {
   width: 100%;
   height: 30%;
-  background: dodgerblue;
   z-index: 2;
   position: absolute;
   bottom: 0;
@@ -60,11 +60,14 @@ video {
   z-index: 5;
   display: flex;
   justify-content: space-between;
-
+  opacity: 0;
+  transition: all 0.5s ease-out 2s;
 }
 
-
-
+.show-controls:hover .controls-container {
+  opacity: 1;
+  transition: all 0.2s ease-out;
+}
 .control-group {
   width: 100%;
   height: 100%;
@@ -83,21 +86,25 @@ video {
 
 /* Progress Bar */
 .progress-range {
-
+  height: 8px;
+  width: calc(100% - 30px);
+  background: rgba(202, 202, 202, 0.5);
   margin: auto;
   border-radius: 10px;
   position: absolute;
   left: 15px;
   top: 15px;
   cursor: pointer;
-
+  transition: height 0.1s ease-in-out;
 }
 
-
+.progress-range:hover {
+  height: 10px;
+}
 
 .progress-bar {
   background: var(--primary-color);
-  width: 50%;
+  width: 20%;
   height: 100%;
   border-radius: 10px;
   transition: all 0.5s ease;
@@ -166,10 +173,7 @@ video {
   margin-right: 15px;
 }
 
-
-
 select {
-
   color: var(--font-color);
   border: none;
   font-size: 18px;
@@ -177,8 +181,6 @@ select {
   top: -2.5px;
   border-radius: 5px;
 }
-
-
 
 select > option {
   background: rgba(0, 0, 0, 0.9);
@@ -207,7 +209,10 @@ select > option {
 
 /* Media Query: Large Smartphone (Vertical) */
 @media screen and (max-width: 600px) {
-
+  .player {
+    min-width: 0;
+    max-width: 95vw;
+  }
 
   .fas {
     font-size: 20px;
